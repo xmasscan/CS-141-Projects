@@ -1,16 +1,70 @@
-#include "encryption.hpp"
+#include "encryption.cpp"
 #include <iostream>
+#pragma once
 
-// Author: Michael Hanif Khan
-// Date: 2/27/2024
-// Project 3: Encryption
-/*
-A program which encrypts user input Strings with the '141 Cipher'.
-The '141 Cipher' is variation on the Caesar Cipher. For more info, read the readme.
-All encryption functions stored in encryption.hpp.
-*/
+using namespace std;
 
 int main(){
-    test();
-    return 0;
+
+	int menuChoice;
+	int shift;
+	char direction;
+
+	string message;
+	string encryptedMessage;
+	string decryptedMessage;
+
+	cout << "1. Encrypt message" << endl;
+	cout << "2. Decrypt message" << endl;
+	cout << "3. Show decrypted possibilties" << endl;
+	cout << "4. Break code" << endl;
+	cout << "Enter choice: ";
+	
+	cin >> menuChoice;
+	
+	switch(menuChoice)
+	{
+		case(1):
+			cout << "Enter shift (1-26): ";
+			cin >> shift;
+			cout << "Enter direction (f or b): ";
+			cin >> direction;
+			cout << "Enter message: ";
+			//flushes out newline
+			cin.ignore();
+			getline(cin, message);
+			
+			encryptedMessage = encrypt(message,shift,direction);
+			cout << "Encrypted message: " << encryptedMessage;
+			break;
+		case(2):
+			cout << "Enter shift (1-26): ";
+			cin >> shift;
+			cout << "Enter direction (f or b): ";
+			cin >> direction;
+			cout << "Enter message: ";
+			cin.ignore();
+			getline(cin, message);
+
+			decryptedMessage = decrypt(message,shift,direction);
+			cout << "Decrypted message: " << decryptedMessage;	
+			break;
+		case(3):
+			cout << "Enter Message: ";
+			cin.ignore();
+			getline(cin, message);
+			for(int i = 1; i < 27; ++i)
+			{	
+				decryptedMessage = decrypt(message,i,'f');
+				cout << i << "f: " << decryptedMessage << endl;
+				decryptedMessage = decrypt(message,i,'b');
+				cout << i << "b: " << decryptedMessage << endl;
+			}
+			break;
+		default:
+			cout << "Not an option. Choose again.";
+			cin >> menuChoice;
+			break;
+	}
+	return 0;
 }

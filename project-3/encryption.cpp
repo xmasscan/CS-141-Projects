@@ -1,5 +1,4 @@
 #include "encryption.h"
-#pragma once
 
 using namespace std;
 
@@ -8,7 +7,6 @@ using namespace std;
 string encrypt(string message, int constantShift, char direction)
 {
 	string encryptedMessage = "";
-	bool isBackwards = false;
 	char currentChar;
 	int lastCharVal;
 	int shift;
