@@ -3,5 +3,5 @@
 
 using namespace std;
 
-string encrypt(string message, int constantShift, char direction);
-string decrypt(string message, int constantShift, char direction);
+inline string encrypt(string message, int constantShift, char direction);
+inline string decrypt(string message, int constantShift, char direction);
