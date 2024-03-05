@@ -13,7 +13,18 @@ string encrypt(string message, int constantShift, char direction)
 	
 	//Ascii value of '[', our placeholder for ' '.
 	const int UPPERBOUND = 91;
-	
+
+	// Reversing string for backwards encryption
+	if (direction == 'b')
+	{
+		string reverseMessage = "";
+		for(int i = message.size() - 1; i >= 0; i--)
+		{
+			reverseMessage += message.at(i);
+		}
+		message = reverseMessage;
+	}
+
 	shift = constantShift;
 	for(int i = 0; i < message.size(); ++i)
 	{
@@ -34,7 +45,7 @@ string encrypt(string message, int constantShift, char direction)
 		// If a character isn't in the set of characters we care about encrypting, {A,B,C...Y,Z, }, then we ignore it and don't decrypt it.
 		if(int(currentChar) >= 65 && int(currentChar) <= 91)
 		{
-			lastCharVal = int(currentChar) - 65;
+			lastCharVal = int(currentChar) - 64;
 			//If the current shift would set the current character to a value outside of our acceptable range of ascii characters, we readjust.
 			if(currentChar + shift > UPPERBOUND)
 			{
@@ -49,8 +60,7 @@ string encrypt(string message, int constantShift, char direction)
 		// Brackets are converted back into spaces for encrypted message. :)
 		if(currentChar == '[') currentChar = ' ';
 
-		if(direction == 'b') encryptedMessage = currentChar + encryptedMessage;
-		else encryptedMessage += currentChar;
+		encryptedMessage += currentChar;
 	}
 	return encryptedMessage;
 }
