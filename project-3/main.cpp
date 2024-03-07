@@ -61,6 +61,13 @@ int main(){
 				cout << i << "b: " << decryptedMessage << endl;
 			}
 			break;
+		case(4):
+			cout << "Enter message: ";
+			int dummy;
+			cin.ignore();
+			getline(cin, dummy);
+			cout << "Unable to find a decrypted message.";
+			break;
 		default:
 			cout << "Not an option. Choose again.";
 			cin >> menuChoice;
