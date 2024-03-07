@@ -1,6 +1,6 @@
 #include "encryption.cpp"
 #include <iostream>
-#pragma once
+// #pragma once
 
 using namespace std;
 
@@ -68,3 +68,4 @@ int main(){
 	}
 	return 0;
 }
+
