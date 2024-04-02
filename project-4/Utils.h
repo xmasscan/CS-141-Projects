@@ -1,6 +1,6 @@
 #pragma once
 
-#defne _USE_MATH_DEFINES
+#define _USE_MATH_DEFINES
 #include <math.h>
 
 // distance calculates the distance between two points, using their latitude and longitude
@@ -24,4 +24,4 @@ double distance(double lat1, double lon1, double lat2, double lon2) {
 
 	// Convert to nautical miles, then multiply by 1.1508 to get regular miles
 	return distanceInRadians * 180 * 60 / M_PI * 1.1508;
-}i
+}
