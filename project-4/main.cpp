@@ -25,7 +25,7 @@ class Store{
 	// Latitude and Longitude
 	// Brief, but similiar to naming convention in Utils.H and common nomenclature.
 	double lat;
-    double lon;
+        double lon;
 
     // Store constructor. Variable names are self-explanitory.
     Store(string name, int squareFeet, string size, string address, string neighborhood, double lat, double lon){
@@ -40,6 +40,15 @@ class Store{
         this->lon = lon;
     }
 
+    // Getter Functions
+    string getName(){ return this->name; }
+    int getSquareFeet(){ return this->squareFeet; }
+    string getSize(){ return this->size; }
+    string getAddress(){ return this->address; }
+    string getNeighborhood(){ return this->neighborhood; }
+    double getLat(){ return this->lat; }
+    double getLon(){ return this->lon; }
+
 };
 
 // File Reading Functions
@@ -51,9 +60,9 @@ class Store{
  */
 // Example Line: OLD WORLD MARKET,10001,Large,5129 N BROADWAY,UPTOWN,41.9754754,-87.65969701
 
-// TODO: Make function which loops this function until EOF.
+
 // Takes current line of data within file, creates new Store object, returns pointer to new object.
-Store* getStores(string& filename)
+Store* getStores(string filename)
 {
     ifstream fileIn;
     fileIn.open(filename);
@@ -82,7 +91,7 @@ Store* getStores(string& filename)
     getline(fileIn, storeAddress, ','); // '' address
     getline(fileIn, storeArea, ','); // '' Area
     getline(fileIn, stringLat, ','); // lat
-    getline(flieIn, stringLon, ','); // lon
+    getline(fileIn, stringLon, ','); // lon
 
     // converts non-strings from strings
     storeFeet = stoi(stringFeet);
@@ -94,6 +103,36 @@ Store* getStores(string& filename)
     
     currentStore = new Store(storeName, storeFeet, storeSize, storeAddress, storeArea, storeLat, storeLon);
     return currentStore;
+}
+
+// Reads every line in the file, calls getStores() on each line to create a new Store object for every line in a given file.
+// Returns a vector of pointers to these Store objects.
+
+vector<Store*> readFile(string filename)
+{
+	string currentLine = "";
+	Store* currentStore = nullptr;
+	vector<Store*> storeList;
+
+	ifstream fileIn;
+	fileIn.open(filename);
+	// Runs while the current file is open; formatted this way so we can neatly close the file when we are done.
+	// You gotta clean up after yourself!!!
+	if(fileIn.is_open())
+	{
+		// Reads until the end of the current line, saves current line to 
+		while(getline(fileIn, currentLine))
+		{
+			// the current line of the text file is stored within currentLine.
+			// getStores returns a pointer to a new store object created with the appropriate data.
+			currentStore = getStores(currentLine);
+			// adds the pointer to the current store to a vector containing all stores.
+			storeList.push_back(currentStore);
+		}
+		// Closes the file when we're done :)
+		fileIn.close();
+	}
+        return storeList;
 }
 
 void textToData(string filename)
@@ -109,12 +148,14 @@ int main()
 {
     string filename;
     int choice;
+    vector<Store*> storeList;
     
     cout << "Enter filename: " << endl;
     cin >> filename;
     
     // Reads file and compiles information into a vector of Store objects.
-    getStores(filename);    
+    // readFile returns a vector of pointers to Store objects. We will use these 
+    storeList = readFile(filename);
 
     cout << "Select a menu option: " << endl;
     cout << "   1. Display general grocery stores information" << endl;
@@ -123,21 +164,23 @@ int main()
     cout << "   4. Search for store by name" << endl;
     cout << "   5. Exit" << endl;
     cout << "Your choice: ";
+ 
     
-    cin >> choice;
-    switch(choice){
-	case(1):
-	    cout << "Choice One" << endl;
-	    break;
-	case(2):
-	    cout << "Choice Two" << endl;
-	    break;
-	case(3):
-        cout << "three" <<endl;
-	    break;
-    default:
-        break;
-    }
+
+//    cin >> choice;
+//    switch(choice){
+//	case(1):
+//	    cout << "Choice One" << endl;
+//	    break;
+//	case(2):
+//	    cout << "Choice Two" << endl;
+//	    break;
+//	case(3):
+//        cout << "three" <<endl;
+//	    break;
+//    default:
+//        break;
+//    }
 
 }
 
