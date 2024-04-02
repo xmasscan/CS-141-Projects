@@ -135,15 +135,6 @@ vector<Store*> readFile(string filename)
         return storeList;
 }
 
-void textToData(string filename)
-{
-    // We will be storing pointers to Store objects, rather than the objects themselves.
-    vector<Store*> storeList;
-    // Initializes first Store object as a null pointer, then assigns it the pointer of each new Store object.
-    Store* currStore = nullptr;
-
-}
-
 int main() 
 {
     string filename;
@@ -165,22 +156,13 @@ int main()
     cout << "   5. Exit" << endl;
     cout << "Your choice: ";
  
-    
+    cin >> choice;
 
-//    cin >> choice;
-//    switch(choice){
-//	case(1):
-//	    cout << "Choice One" << endl;
-//	    break;
-//	case(2):
-//	    cout << "Choice Two" << endl;
-//	    break;
-//	case(3):
-//        cout << "three" <<endl;
-//	    break;
-//    default:
-//        break;
-//    }
+    switch(choice){
+        case 1:
+
+            break;
+    }
 
 }
 
