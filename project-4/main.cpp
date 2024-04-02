@@ -23,24 +23,41 @@ class Store{
 	string address;
 	string neighborhood;
 	// Latitude and Longitude
-	// I'm used to them being referred to this way, but you are free to rename these for clarity.
+	// Brief, but similiar to naming convention in Utils.H and common nomenclature.
 	double lat;
     double lon;
 
+    // Store constructor. Variable names are self-explanitory.
     Store(string name, int squareFeet, string size, string address, string neighborhood, double lat, double lon){
+        // this->variableName = variableName
+        // "new" operand allocates required memory for data and returns a pointer, so our objects in code will be pointers.
         this->name = name;
-        squareFeet = squareFeet;
-        size = size;
-        address = address;
-        neighborhood = neighborhood;
-        lat = lat;
-        lon = lon;
+        this->squareFeet = squareFeet;
+        this->size = size;
+        this->address = address;
+        this->neighborhood = neighborhood;
+        this->lat = lat;
+        this->lon = lon;
     }
 
 };
 
-//
+// File Reading Function
+/*
+ * Gets each line of the file and creates a new store with the data.
+ * Each line of data can be assumed to be reliably structured similiarly to the Store constructor.
+ * That is, the order of data is as follows:
+ *  Name, Square Footage, 'Size' (is SF 10,000+?), Address, Neighborhood, Latitude, Longitude.
+ */
 
+void textToData(string filename)
+{
+    // We will be storing pointers to Store objects, rather than the objects themselves.
+    vector<Store*> storeList;
+    // Initializes first Store object as a null pointer, then assigns it the pointer of each new Store object.
+    Store* currStore = nullptr;
+
+}
 
 int main() 
 {
@@ -50,7 +67,7 @@ int main()
     
     cout << "Enter filename: " << endl;
     cin >> filename;
-
+    
     // Reads file and compiles information into a vector of Store objects.
     
 
