@@ -42,13 +42,59 @@ class Store{
 
 };
 
-// File Reading Function
+// File Reading Functions
 /*
  * Gets each line of the file and creates a new store with the data.
  * Each line of data can be assumed to be reliably structured similiarly to the Store constructor.
  * That is, the order of data is as follows:
  *  Name, Square Footage, 'Size' (is SF 10,000+?), Address, Neighborhood, Latitude, Longitude.
  */
+// Example Line: OLD WORLD MARKET,10001,Large,5129 N BROADWAY,UPTOWN,41.9754754,-87.65969701
+
+// TODO: Make function which loops this function until EOF.
+// Takes current line of data within file, creates new Store object, returns pointer to new object.
+Store* getStores(string& filename)
+{
+    ifstream fileIn;
+    fileIn.open(filename);
+    
+    Store* currentStore = nullptr;
+
+    // Store Object Data
+    string storeName;
+    string stringFeet; // getline input is string, gets converted afterwards
+    string storeSize;
+    string storeAddress;
+    string storeArea;
+    // temp string values of lat and lon bcs of getline input.
+    string stringLat;
+    string stringLon;
+
+    double storeLat;
+    double storeLon;
+    int storeFeet;
+
+    // Collecting data from a single line
+
+    getline(fileIn, storeName, ','); // gets store name
+    getline(fileIn, stringFeet, ','); // gets square feet
+    getline(fileIn, storeSize, ','); // gets store 'size'
+    getline(fileIn, storeAddress, ','); // '' address
+    getline(fileIn, storeArea, ','); // '' Area
+    getline(fileIn, stringLat, ','); // lat
+    getline(flieIn, stringLon, ','); // lon
+
+    // converts non-strings from strings
+    storeFeet = stoi(stringFeet);
+    storeLat = stod(stringLat);
+    storeLon = stod(stringLon);
+
+    // Data collection complete!
+    // Time to make some objects...
+    
+    currentStore = new Store(storeName, storeFeet, storeSize, storeAddress, storeArea, storeLat, storeLon);
+    return currentStore;
+}
 
 void textToData(string filename)
 {
@@ -63,13 +109,12 @@ int main()
 {
     string filename;
     int choice;
-    ifstream fileIn;
     
     cout << "Enter filename: " << endl;
     cin >> filename;
     
     // Reads file and compiles information into a vector of Store objects.
-    
+    getStores(filename);    
 
     cout << "Select a menu option: " << endl;
     cout << "   1. Display general grocery stores information" << endl;
